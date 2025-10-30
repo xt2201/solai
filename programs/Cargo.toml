@@ -1,0 +1,28 @@
+[package]
+name = "solai_program"
+version = "0.1.0"
+edition = "2021"
+authors = ["SolAI Contributors"]
+description = "Anchor program for SolAI MVP"
+license = "Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "solai_program"
+
+[features]
+no-entrypoint = []
+no-idl = []
+cpi = []
+test-sbf = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = { version = "0.32", features = ["init-if-needed"] }
+
+[build-dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }

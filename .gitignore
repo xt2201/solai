@@ -1,0 +1,51 @@
+# Node
+node_modules/
+dist/
+.next/
+
+# Python
+__pycache__/
+.venv/
+venv/
+.env
+*.pyc
+
+# Rust
+/target
+/programs/target/
+
+# Build artifacts
+*.log
+.DS_Store
+
+# Configuration files with secrets
+config.yml
+config/config.yml
+.env
+.env.local
+.env.production
+
+# Keypairs and secrets
+keys/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!next.config.js
+!tailwind.config.cjs
+!**/idl/*.json
+!target/idl/*.json
+!target/types/*.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Internal documentation and pitch decks
+docs/

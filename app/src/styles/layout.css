@@ -1,0 +1,41 @@
+/**
+ * Simplified Layout CSS - Hard-coded values
+ * Fixes layout chaos by removing CSS variable dependencies
+ */
+
+/* Core Layout Variables - Inline for reliability */
+:root {
+  /* Colors */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --border-default: #334155;
+  --color-primary: #6366f1;
+  --color-success: #10b981;
+  
+  /* Layout Dimensions */
+  --topnav-height: 64px;
+  --sidebar-width-expanded: 240px;
+  --sidebar-width-collapsed: 64px;
+  
+  /* Z-index */
+  --z-topnav: 50;
+  --z-sidebar: 30;
+  --z-overlay: 40;
+}
+
+/* Reset potential conflicts */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+}

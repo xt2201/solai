@@ -1,0 +1,871 @@
+/* Dashboard.module.css */
+
+/* Common styles */
+.loading,
+.error {
+  padding: 2rem;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.error {
+  color: #ef4444;
+}
+
+/* System Metrics Panel */
+.metricsPanel {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #334155;
+}
+
+.metricsPanel h2 {
+  margin: 0 0 1.5rem 0;
+  color: #f1f5f9;
+  font-size: 1.5rem;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metricCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.metricLabel {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+.metricValue {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.statusConnected {
+  color: #10b981;
+}
+
+.statusDisconnected {
+  color: #64748b;
+}
+
+.walletAddress {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  margin-top: 0.25rem;
+  font-family: monospace;
+}
+
+.modelName {
+  font-size: 1.125rem;
+  color: #60a5fa;
+}
+
+.modelProvider {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.costSol {
+  color: #a78bfa;
+}
+
+.costUsd {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.costHighlight {
+  font-size: 0.75rem;
+  color: #10b981;
+  margin-top: 0.5rem;
+}
+
+.bigNumber {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.subtext {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.uptime {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.tokenomicsBar {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.tokenomicItem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.tokenomicItem .label {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.tokenomicItem .value {
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+/* Market Sentiment Panel */
+.marketPanel {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #334155;
+}
+
+.marketPanel h2,
+.marketPanel h3 {
+  color: #f1f5f9;
+  margin-bottom: 1.5rem;
+}
+
+.sentimentSection {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sentimentCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sentimentHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.indicator {
+  font-size: 2rem;
+}
+
+.sentimentLabel {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.sentimentScore {
+  font-size: 1rem;
+  color: #94a3b8;
+}
+
+.sentimentDescription {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.volatilityCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.volatilityHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.riskBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.prediction {
+  color: #cbd5e1;
+  margin-bottom: 0.5rem;
+}
+
+.vix {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.hotTopicsSection {
+  margin-bottom: 2rem;
+}
+
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.topicCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.topicHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.topicRank {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.topicName {
+  flex: 1;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.topicTrend {
+  color: #10b981;
+  font-size: 0.875rem;
+}
+
+.topicCount {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.topicProtocols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.protocolTag {
+  background: rgba(99, 102, 241, 0.1);
+  color: #a78bfa;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.ecosystemSection h3 {
+  margin-top: 0;
+}
+
+.ecosystemGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.ecosystemStat {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.statLabel {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.statValue {
+  color: #f1f5f9;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+}
+
+.statChange {
+  color: #10b981;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Wallet Overview Panel */
+.walletPanel {
+  background: linear-gradient(135deg, #1e293b 0%, #312e81 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #334155;
+}
+
+.walletPanel h2,
+.walletPanel h3,
+.walletPanel h4 {
+  color: #f1f5f9;
+  margin-bottom: 1rem;
+}
+
+.connectPrompt {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(30, 41, 59, 0.4);
+  border-radius: 12px;
+  border: 2px dashed #334155;
+}
+
+.connectPrompt p {
+  color: #cbd5e1;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.portfolioHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.totalValue {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: inline-block;
+  min-width: 300px;
+}
+
+.valueUsd {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 0.5rem;
+}
+
+.valueSol {
+  font-size: 1.125rem;
+  color: #a78bfa;
+}
+
+.assetSection {
+  margin-bottom: 2rem;
+}
+
+.assetList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.assetItem {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.assetHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.assetSymbol {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #f1f5f9;
+}
+
+.assetPercentage {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.assetDetails {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.assetAmount {
+  flex: 1;
+}
+
+.assetValue {
+  color: #94a3b8;
+}
+
+.assetChange {
+  font-weight: 600;
+}
+
+.assetBar {
+  height: 6px;
+  background: rgba(51, 65, 85, 0.5);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.assetBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1 0%, #a78bfa 100%);
+  transition: width 0.3s ease;
+}
+
+.riskSection {
+  margin-bottom: 2rem;
+}
+
+.riskOverview {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.riskScoreCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.riskScoreLabel {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.riskScoreValue {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.riskLevel {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.riskFactors {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.riskFactor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.riskFactor:last-child {
+  margin-bottom: 0;
+}
+
+.factorName {
+  width: 150px;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+.factorBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(51, 65, 85, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.factorBarFill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.factorValue {
+  width: 40px;
+  text-align: right;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.riskBreakdown h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.exposureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.exposureCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.exposureType {
+  color: #a78bfa;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.exposurePercentage {
+  color: #f1f5f9;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.exposureRisk {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.exposureProtocols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recommendationsSection {
+  margin-bottom: 2rem;
+}
+
+.recommendationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.recommendationCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.recHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.recType {
+  color: #a78bfa;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.recPriority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.recPriority[data-priority="high"] {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.recPriority[data-priority="medium"] {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.recPriority[data-priority="low"] {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.recMessage {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.activitySection {
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.activityStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.activityStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Quick Actions Panel */
+.quickActionsPanel {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #334155;
+}
+
+.quickActionsPanel h2 {
+  color: #f1f5f9;
+  margin-bottom: 0.5rem;
+}
+
+.quickActionsSubtitle {
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+.quickActionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.quickActionCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.quickActionCard:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: #6366f1;
+  transform: translateY(-2px);
+}
+
+.actionIcon {
+  font-size: 2rem;
+}
+
+.actionContent {
+  flex: 1;
+}
+
+.actionTitle {
+  color: #f1f5f9;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.actionCategory {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.actionArrow {
+  color: #6366f1;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.quickActionCard:hover .actionArrow {
+  transform: translateX(4px);
+}
+
+/* Recent Logs Panel */
+.logsPanel {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #334155;
+}
+
+.logsPanel h2 {
+  color: #f1f5f9;
+  margin-bottom: 1.5rem;
+}
+
+.logsHeader {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.4);
+  border-radius: 8px;
+}
+
+.logsStat {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.logsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logCard {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.logHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.logTime {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.logWallet {
+  color: #a78bfa;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.logFee {
+  color: #10b981;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.logSummary {
+  color: #f1f5f9;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.logDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.logHash {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hashLabel {
+  color: #94a3b8;
+}
+
+.hashValue {
+  color: #cbd5e1;
+  font-family: monospace;
+}
+
+.explorerLink {
+  display: inline-block;
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.explorerLink:hover {
+  color: #818cf8;
+}
+
+.logsFooter {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.proofExplainer {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .metricsGrid,
+  .topicsGrid,
+  .quickActionsGrid,
+  .ecosystemGrid,
+  .exposureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sentimentSection,
+  .riskOverview {
+    grid-template-columns: 1fr;
+  }
+
+  .tokenomicsBar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,100 @@
+# ====================================================================
+# CẤU HÌNH CHUNG DỰ ÁN SOLAI - AI AGENT TRÊN SOLANA
+# ====================================================================
+
+global:
+  environment: development  # production, staging, development
+  project_name: SolAI
+  default_log_level: info
+# Cấu hình Tracing/Observability (LangSmith)
+  langsmith:
+    enabled: false
+    api_key: "YOUR_LANGSMITH_API_KEY"       # Get from https://smith.langchain.com/
+    project_name: "solai-v1"  # Project name in LangSmith
+    endpoint: "https://api.smith.langchain.com/"
+    tracing_v2: true
+# ====================================================================
+# 1. CẤU HÌNH BLOCKCHAIN SOLANA (PROGRAMS/API-GATEWAY)
+# ====================================================================
+
+solana:
+  cluster: devnet            # mainnet-beta, devnet, testnet
+  rpc_url: "https://api.devnet.solana.com" # Replace with stable RPC (Helius/Ankr recommended)
+  websocket_url: "wss://api.devnet.solana.com"
+
+  program:
+    id: "YOUR_DEPLOYED_PROGRAM_ID"  # Your deployed Solana program ID
+    admin_keypair_path: "./keys/program_admin.json" # Path to admin keypair
+
+  tokenomics:
+    fee_token_mint: "YOUR_TOKEN_MINT_ADDRESS" # SOLAI token mint address
+    fee_per_query_in_tokens: 0.5   # Fee per query in tokens
+    fee_sol_for_logging_lamports: 10000 # Transaction fee in lamports
+
+# ====================================================================
+# 2. CẤU HÌNH API GATEWAY (NODE.JS SERVER)
+# ====================================================================
+
+api_gateway:
+  port: 3001
+  allowed_origins:
+    - "http://localhost:3000"
+    - "https://app.solai.com"
+
+  # Cấu hình giao tiếp nội bộ với LLM Processor (Python)
+  llm_processor:
+    base_url: "http://localhost:8000"
+    timeout_ms: 30000  # 30 giây timeout cho phản hồi LLM
+
+  # Cấu hình Indexer (Dùng cho việc lấy dữ liệu lịch sử)
+  indexer:
+    type: "HELIUS" # Options: HELIUS, CUSTOM_POSTGRES, TREETRUNK
+    api_key: "YOUR_HELIUS_API_KEY"  # Get from https://helius.dev/
+
+# ====================================================================
+# 3. CẤU HÌNH LLM PROCESSOR (PYTHON/RAG)
+# ====================================================================
+
+llm_processor:
+  port: 8000
+  provider: "CEREBRAS"  # Main LLM provider: GEMINI, CEREBRAS
+  # Cấu hình Gemini LLM
+  gemini:
+    api_key: "YOUR_GEMINI_API_KEY" # Get from https://aistudio.google.com/
+    model_name: "gemini-2.0-flash-lite" # AI model to use
+    temperature: 0.2             # Creativity level (0.0 - 1.0)
+    max_output_tokens: 2048
+  # Cấu hình Cerebras LLM (Nếu được chọn làm LLM chính)
+  cerebras:
+    api_key: "YOUR_CEREBRAS_API_KEY"  # Get from https://cerebras.ai/
+    model_name: "qwen-3-32b"
+    endpoint_url: "https://api.cerebras.ai/v1"    
+  # Cấu hình Embedding Model Ollama
+  ollama_embedding:
+      port: 11434
+      provider: "remote"
+      base_url: "http://localhost:11434" # Ollama server address
+      model: "bge-m3"                   # Embedding model
+  # Cấu hình RAG (Retrieval-Augmented Generation)
+  rag:
+    enabled: true
+    vector_db:
+      provider: "PINECONE"      # Vector database provider
+      api_key: "YOUR_PINECONE_API_KEY"  # Get from https://pinecone.io/
+      environment: "gcp-starter"
+      index_name: "solana-defi-docs" # Index name for DeFi documents
+      top_k_results: 5           # Number of relevant documents to retrieve
+  # Cấu hình Firecrawl (Để thu thập dữ liệu mới và cập nhật RAG Index)
+  firecrawl:
+    api_key: "YOUR_FIRECRAWL_API_KEY"  # Get from https://firecrawl.dev/
+    mode: "crawl" # crawl or scrape
+    max_crawl_depth: 2
+    # Danh sách URL nguồn cần theo dõi (ví dụ: Docs của các giao thức DeFi mới)
+    source_urls:
+      - "https://docs.jup.ag/"
+      - "https://docs.raydium.io/raydium/overview"
+  # Cấu hình Dữ liệu Solana cho LLM (Data Context)
+  context_generation:
+    max_transaction_history: 10   # Chỉ xem xét 10 giao dịch gần nhất
+    max_portfolio_tokens: 5       # Chỉ phân tích 5 token lớn nhất trong ví
+    include_market_data: true    # Có bao gồm dữ liệu giá/biến động gần đây không

@@ -1,0 +1,17 @@
+[workspace]
+members = [
+  "programs"
+]
+
+[programs.localnet]
+solai_program = "8pMVJamgnZKWmYJQQ8gvPaT7UFVg5BAr3Rg5HY8epYyh"
+
+[programs.devnet]
+solai_program = "8pMVJamgnZKWmYJQQ8gvPaT7UFVg5BAr3Rg5HY8epYyh"
+
+[provider]
+cluster = "devnet"
+wallet = "./keys/program_admin.json"
+
+[scripts]
+init-user = "anchor run init-user"
