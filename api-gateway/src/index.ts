@@ -332,9 +332,9 @@ app.get("/api/stats/platform", async (_req: Request, res: Response) => {
   }
 });
 
-app.use(accountsRouter);
-app.use(chatRouter);
-app.use("/dashboard", dashboardRouter);
+app.use("/api", accountsRouter);
+app.use("/api", chatRouter);
+app.use("/api/dashboard", dashboardRouter);
 
 const port = config.api_gateway.port;
 app.listen(port, () => {

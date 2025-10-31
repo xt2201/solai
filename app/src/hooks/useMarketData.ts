@@ -38,7 +38,7 @@ export const useMarketData = (apiBaseUrl: string) => {
     const fetchMarketData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiBaseUrl}/dashboard/market`);
+        const response = await fetch(`${apiBaseUrl}/api/dashboard/market`);
         if (!response.ok) {
           throw new Error("Failed to fetch market data");
         }

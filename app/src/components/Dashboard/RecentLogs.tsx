@@ -27,7 +27,7 @@ export const RecentLogs = ({ apiBaseUrl }: RecentLogsProps) => {
     const fetchLogs = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiBaseUrl}/dashboard/recent-logs`);
+        const response = await fetch(`${apiBaseUrl}/api/dashboard/recent-logs`);
         if (!response.ok) {
           throw new Error("Failed to fetch logs");
         }

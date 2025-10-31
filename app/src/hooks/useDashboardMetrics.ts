@@ -35,7 +35,7 @@ export const useDashboardMetrics = (apiBaseUrl: string) => {
     const fetchMetrics = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiBaseUrl}/dashboard/metrics`);
+        const response = await fetch(`${apiBaseUrl}/api/dashboard/metrics`);
         if (!response.ok) {
           throw new Error("Failed to fetch metrics");
         }
