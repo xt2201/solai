@@ -37,12 +37,24 @@ class FirecrawlWorker:
             
             # Use scrape for single page or crawl for multi-page
             if self.mode == "scrape":
-                # Scrape single page (v2 API)
+                # Scrape single page (v2 API returns object, not dict)
                 result = self.app.scrape(
                     url,
                     formats=['markdown', 'html']
                 )
-                documents = [result] if result else []
+                
+                # Convert result object to dict
+                if result:
+                    doc = {
+                        'markdown': getattr(result, 'markdown', ''),
+                        'html': getattr(result, 'html', ''),
+                        'content': getattr(result, 'markdown', ''),  # Use markdown as content
+                        'metadata': getattr(result, 'metadata', {}),
+                        'url': url
+                    }
+                    documents = [doc]
+                else:
+                    documents = []
             else:
                 # Crawl multiple pages with depth (v2 API)
                 from firecrawl.types import ScrapeOptions
@@ -52,7 +64,28 @@ class FirecrawlWorker:
                     limit=50,  # Max pages to crawl
                     scrape_options=ScrapeOptions(formats=['markdown', 'html'])
                 )
-                documents = crawl_result.get('data', []) if crawl_result else []
+                
+                # Handle CrawlJob object - wait for completion
+                if crawl_result:
+                    # If it's a CrawlJob, get the data
+                    if hasattr(crawl_result, 'data'):
+                        raw_docs = crawl_result.data
+                    else:
+                        # Fallback: try to get data attribute
+                        raw_docs = getattr(crawl_result, 'data', [])
+                    
+                    # Convert each document object to dict
+                    documents = []
+                    for doc in raw_docs:
+                        documents.append({
+                            'markdown': getattr(doc, 'markdown', ''),
+                            'html': getattr(doc, 'html', ''),
+                            'content': getattr(doc, 'markdown', ''),
+                            'metadata': getattr(doc, 'metadata', {}),
+                            'url': getattr(doc, 'url', url)
+                        })
+                else:
+                    documents = []
             
             logger.info(f"Successfully crawled {len(documents)} document(s) from {url}")
             return documents
