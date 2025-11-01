@@ -303,20 +303,28 @@ async def final_synthesis_node(state: WorkflowState) -> Dict:
         ]
     else:  # crawl_web
         processed_content = state.get("crawl_response", "")
+        crawl_url = state.get("crawl_url")
+        # Handle None URL case
         sources = [
-            {"type": "web_crawl", "url": state.get("crawl_url")}
+            {"type": "web_crawl", "url": crawl_url if crawl_url else "No URL provided"}
         ]
     
     # Get LLM with structured output
     llm = get_llm_with_structured_output(FinalResponse)
     
-    # Format prompt
+    # Format prompt - ensure all source values are strings
+    source_names = []
+    for s in sources:
+        name = s.get("name") or s.get("url") or "Unknown"
+        # Ensure name is not None
+        source_names.append(str(name) if name else "Unknown")
+    
     prompt = FINAL_OUTPUT_PROMPT.format(
         context=state.get("context", "No context provided"),
         query=state["query"],
         processed_content=processed_content,
         intent=intent,
-        sources=", ".join([s.get("name", s.get("url", "Unknown")) for s in sources])
+        sources=", ".join(source_names)
     )
     
     # Invoke LLM
