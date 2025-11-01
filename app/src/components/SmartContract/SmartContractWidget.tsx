@@ -105,7 +105,7 @@ export const SmartContractWidget = ({ className }: SmartContractWidgetProps) => 
       const response = await fetch(`${apiBaseUrl}/api/program/initialize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ authority: publicKey.toBase58() }),
+        body: JSON.stringify({ user_address: publicKey.toBase58() }),
       });
 
       if (!response.ok) {
@@ -182,7 +182,7 @@ export const SmartContractWidget = ({ className }: SmartContractWidgetProps) => 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          authority: publicKey.toBase58(),
+          user_address: publicKey.toBase58(),
           prompt_hash: promptHash,
           response_hash: responseHash,
         }),

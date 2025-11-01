@@ -136,10 +136,18 @@ export interface SwapQuoteResponse {
   output_token: string;
   input_amount: number;
   output_amount: number;
-  price_impact: number;
-  minimum_received: number;
-  fee: number;
-  route?: string[];
+  input_mint: string;
+  output_mint: string;
+  price_impact_pct: number;
+  slippage_bps: number;
+  minimum_output: number;
+  exchange_rate: number;
+  route_plan?: Array<{
+    dex: string;
+    input_mint: string;
+    output_mint: string;
+    percent: number;
+  }>;
   meta?: {
     mock: boolean;
     reason?: string;
@@ -255,7 +263,8 @@ export async function getSwapQuote(
     throw new Error(`Swap quote failed: ${response.statusText}`);
   }
 
-  return response.json();
+  const data = await response.json();
+  return data.quote; // Extract the quote object from the response
 }
 
 /**

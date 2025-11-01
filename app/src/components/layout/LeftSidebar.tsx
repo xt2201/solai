@@ -82,7 +82,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ collapsed, onToggle })
 
       {/* Mobile Toggle Button */}
       <button
-        className="fixed top-20 left-4 z-50 lg:hidden w-10 h-10 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center"
+        className="fixed top-20 left-4 z-50 lg:hidden w-10 h-10 bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-lg flex items-center justify-center transition-colors duration-300"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close sidebar" : "Open sidebar"}
       >
@@ -94,14 +94,14 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({ collapsed, onToggle })
         id="sidebar-nav"
         className={`
           fixed left-0 top-16 bottom-0 z-sidebar
-          bg-slate-900 border-r border-slate-800
+          bg-[var(--bg-secondary)] border-r border-[var(--border-default)]
           transition-all duration-300
           ${collapsed ? 'w-16' : 'w-60'}
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
         <div className="flex flex-col h-full overflow-y-auto">
-          <div className={`px-4 py-5 border-b border-slate-800 flex ${collapsed ? 'justify-center' : 'justify-start'}`}>
+          <div className={`px-4 py-5 border-b border-[var(--border-default)] flex ${collapsed ? 'justify-center' : 'justify-start'}`}>
             <Link
               href="/"
               className="inline-flex items-center focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:outline-none rounded-lg"

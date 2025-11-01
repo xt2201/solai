@@ -56,7 +56,7 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
       case 'high':
         return 'text-red-400';
       default:
-        return 'text-slate-400';
+        return 'text-[var(--text-tertiary)]';
     }
   };
 
@@ -97,7 +97,7 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-24 bg-slate-800 rounded-lg" />
+                <div className="h-24 bg-[var(--bg-tertiary)] rounded-lg" />
               </div>
             ))}
           </div>
@@ -106,12 +106,12 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
         {error && (
           <div className="text-center py-8">
             <p className="text-red-400">Failed to load opportunities</p>
-            <p className="text-sm text-slate-400 mt-1">{error}</p>
+            <p className="text-sm text-[var(--text-tertiary)] mt-1">{error}</p>
           </div>
         )}
 
         {!loading && !error && opportunities.length === 0 && (
-          <div className="text-center py-8 text-slate-400">
+          <div className="text-center py-8 text-[var(--text-tertiary)]">
             No opportunities available at the moment
           </div>
         )}
@@ -121,7 +121,7 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
             {opportunities.map((opp, index) => (
               <div
                 key={index}
-                className="p-4 rounded-lg bg-gradient-to-r from-slate-800/50 to-slate-900/50 border border-slate-700 hover:border-emerald-500/50 transition-all duration-200 cursor-pointer group"
+                className="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-default)] hover:border-emerald-500/50 transition-all duration-200 cursor-pointer group"
               >
                 <div className="flex items-start justify-between gap-4">
                   {/* Left: Icon and Info */}
@@ -135,18 +135,18 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
                         <h3 className="font-semibold text-white text-base">
                           {opp.protocol}
                         </h3>
-                        <span className="px-2 py-0.5 rounded text-xs bg-slate-800 text-slate-300">
+                        <span className="px-2 py-0.5 rounded text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)]">
                           {getTypeLabel(opp.type)}
                         </span>
                       </div>
                       
                       {opp.token_pair && (
-                        <p className="text-sm text-slate-400 mb-2">
+                        <p className="text-sm text-[var(--text-tertiary)] mb-2">
                           {opp.token_pair}
                         </p>
                       )}
                       
-                      <p className="text-sm text-slate-300 line-clamp-2">
+                      <p className="text-sm text-[var(--text-secondary)] line-clamp-2">
                         {opp.description}
                       </p>
                     </div>
@@ -158,14 +158,14 @@ export const DefiOpportunities = ({ className }: DefiOpportunitiesProps) => {
                       <div className="text-2xl font-bold text-emerald-400">
                         {typeof opp.apy === 'number' ? opp.apy.toFixed(2) : parseFloat(opp.apy).toFixed(2)}%
                       </div>
-                      <div className="text-xs text-slate-400">APY</div>
+                      <div className="text-xs text-[var(--text-tertiary)]">APY</div>
                     </div>
                     
                     <div className="text-right">
                       <div className="text-sm font-medium text-white">
                         ${(opp.tvl / 1000000).toFixed(1)}M
                       </div>
-                      <div className="text-xs text-slate-400">TVL</div>
+                      <div className="text-xs text-[var(--text-tertiary)]">TVL</div>
                     </div>
                     
                     <div className={`text-xs font-medium ${getRiskColor(opp.risk_level)}`}>

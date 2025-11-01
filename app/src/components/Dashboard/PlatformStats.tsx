@@ -62,7 +62,7 @@ export const PlatformStats = ({ className }: PlatformStatsProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-28 bg-slate-800 rounded-lg" />
+                <div className="h-28 bg-[var(--bg-tertiary)] rounded-lg" />
               </div>
             ))}
           </div>
@@ -80,7 +80,7 @@ export const PlatformStats = ({ className }: PlatformStatsProps) => {
           </h2>
           <div className="text-center py-8">
             <p className="text-red-400">Failed to load statistics</p>
-            <p className="text-sm text-slate-400 mt-1">{error}</p>
+            <p className="text-sm text-[var(--text-tertiary)] mt-1">{error}</p>
           </div>
         </div>
       </Card>
@@ -145,7 +145,7 @@ export const PlatformStats = ({ className }: PlatformStatsProps) => {
             return (
               <div
                 key={index}
-                className="p-4 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700 hover:border-slate-600 transition-all duration-200"
+                className="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-default)] hover:border-[var(--border-hover)] transition-all duration-200"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className={`p-2 rounded-lg ${stat.bgColor}`}>

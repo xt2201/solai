@@ -97,7 +97,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
         const connectWalletMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: 'Bạn cần kết nối ví Solana để tôi có thể truy xuất danh mục và đưa ra phân tích chi tiết. Vui lòng nhấn Connect Wallet ở góc trên bên phải.',
+          content: 'You need to connect a Solana wallet so I can access your portfolio and provide detailed analysis. Please click Connect Wallet in the top right corner.',
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, connectWalletMessage]);
@@ -105,7 +105,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
       }
 
       // Use LangGraph endpoint
-      const response = await fetch(`${apiBaseUrl}/chat/langgraph`, {
+      const response = await fetch(`${apiBaseUrl}/api/chat/langgraph`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,11 +125,11 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
       
       // Show dev wallet indicator if using dev wallet
       const devWalletIndicator = devWallet && !connectedWallet 
-        ? '\n\n🔧 Đang dùng dev wallet từ config' 
+        ? '\n\n🔧 Using dev wallet from config' 
         : '';
       
       const metaSummary = data.demo
-        ? '\n\nℹ️ Phiên làm việc đang ở chế độ demo – chưa ghi log on-chain.'
+        ? '\n\nℹ️ Session in demo mode – not logging on-chain.'
         : '';
 
       const assistantMessage: Message = {
@@ -138,7 +138,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
         content:
           data.response_text && data.response_text.length > 0
             ? `${data.response_text}${devWalletIndicator}${metaSummary}`
-            : 'Tôi chưa nhận được phản hồi từ hệ thống. Vui lòng thử lại sau ít phút.',
+            : 'I did not receive a response from the system. Please try again in a few minutes.',
         timestamp: new Date(),
         workflowSteps: data.workflow_steps || [],
       };
@@ -149,7 +149,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại.',
+        content: 'Sorry, an error occurred. Please try again.',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -192,17 +192,17 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
   const getStepLabel = (step: WorkflowStep) => {
     switch (step.node) {
       case 'intent_detection':
-        return 'Phát hiện ý định';
+        return 'Intent Detection';
       case 'chat':
-        return 'Trò chuyện trực tiếp';
+        return 'Direct Chat';
       case 'retrieval':
-        return 'Tìm kiếm tài liệu';
+        return 'Document Search';
       case 'crawl_web':
-        return 'Thu thập thông tin web';
+        return 'Web Crawl';
       case 'final_synthesis':
-        return 'Tổng hợp phản hồi';
+        return 'Response Synthesis';
       case 'error':
-        return 'Lỗi';
+        return 'Error';
       default:
         return step.node;
     }
@@ -213,22 +213,22 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
     const details: string[] = [];
     
     if (step.intent) {
-      details.push(`Ý định: ${step.intent}`);
+      details.push(`Intent Detection: ${step.intent}`);
     }
     if (step.confidence !== undefined) {
-      details.push(`Độ tin cậy: ${(step.confidence * 100).toFixed(1)}%`);
+      details.push(`Confidence: ${(step.confidence * 100).toFixed(1)}%`);
     }
     if (step.sources_count !== undefined) {
-      details.push(`Số nguồn: ${step.sources_count}`);
+      details.push(`Sources: ${step.sources_count}`);
     }
     if (step.url) {
       details.push(`URL: ${step.url}`);
     }
     if (step.success !== undefined) {
-      details.push(`Thành công: ${step.success ? 'Có' : 'Không'}`);
+      details.push(`Success: ${step.success ? 'Yes' : 'No'}`);
     }
     if (step.error) {
-      details.push(`Lỗi: ${step.error}`);
+      details.push(`Error: ${step.error}`);
     }
 
     return details.length > 0 ? details.join(' • ') : null;
@@ -243,10 +243,10 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
             <div className="space-y-2">
               <div className="text-4xl">💬</div>
               <p className="text-[var(--text-secondary)]">
-                Bắt đầu cuộc trò chuyện với Agent Sol AI
+                Start a conversation with SolAI Agent
               </p>
               <p className="text-sm text-[var(--text-tertiary)]">
-                Hoặc chọn một Quick Action ở trên
+                Or choose a Quick Action above
               </p>
             </div>
           </div>
@@ -275,8 +275,8 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                       <>
                         {/* Workflow Steps */}
                         {message.workflowSteps && message.workflowSteps.length > 0 && (
-                          <div className="mb-4 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
-                            <div className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">
+                          <div className="mb-4 p-3 bg-[var(--bg-secondary)] rounded-lg border border-[var(--border-default)]">
+                            <div className="text-xs font-semibold text-[var(--text-tertiary)] mb-2 uppercase tracking-wide">
                               Quy trình xử lý
                             </div>
                             <div className="space-y-2">
@@ -289,7 +289,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                                     </span>
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center gap-2">
-                                        <span className="text-sm font-medium text-slate-200">
+                                        <span className="text-sm font-medium text-[var(--text-primary)]">
                                           {getStepLabel(step)}
                                         </span>
                                         {step.status === 'completed' && (
@@ -300,7 +300,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                                         )}
                                       </div>
                                       {details && (
-                                        <div className="text-xs text-slate-400 mt-0.5">
+                                        <div className="text-xs text-[var(--text-tertiary)] mt-0.5">
                                           {details}
                                         </div>
                                       )}
@@ -318,7 +318,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                           remarkPlugins={[remarkGfm]}
                           components={{
                             h1: ({ children }) => (
-                              <h1 className="text-xl font-bold mb-3 mt-4 text-white border-b border-slate-700 pb-2">
+                              <h1 className="text-xl font-bold mb-3 mt-4 text-[var(--text-primary)] border-b border-[var(--border-default)] pb-2">
                                 {children}
                               </h1>
                             ),
@@ -328,12 +328,12 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                               </h2>
                             ),
                             h3: ({ children }) => (
-                              <h3 className="text-base font-semibold mb-2 mt-2 text-slate-100">
+                              <h3 className="text-base font-semibold mb-2 mt-2 text-[var(--text-primary)]">
                                 {children}
                               </h3>
                             ),
                             p: ({ children }) => (
-                              <p className="mb-3 text-slate-200 leading-relaxed">
+                              <p className="mb-3 text-[var(--text-primary)] leading-relaxed">
                                 {children}
                               </p>
                             ),
@@ -348,7 +348,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                               </ol>
                             ),
                             li: ({ children }) => (
-                              <li className="text-slate-200 leading-relaxed">
+                              <li className="text-[var(--text-primary)] leading-relaxed">
                                 {children}
                               </li>
                             ),
@@ -358,22 +358,22 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                               </strong>
                             ),
                             em: ({ children }) => (
-                              <em className="italic text-slate-300">
+                              <em className="italic text-[var(--text-secondary)]">
                                 {children}
                               </em>
                             ),
                             code: ({ inline, children }: any) => 
                               inline ? (
-                                <code className="px-1.5 py-0.5 rounded bg-slate-800 text-emerald-400 text-sm font-mono border border-slate-700">
+                                <code className="px-1.5 py-0.5 rounded bg-[var(--bg-tertiary)] text-emerald-400 text-sm font-mono border border-[var(--border-default)]">
                                   {children}
                                 </code>
                               ) : (
-                                <code className="block text-slate-200 font-mono text-sm">
+                                <code className="block text-[var(--text-primary)] font-mono text-sm">
                                   {children}
                                 </code>
                               ),
                             pre: ({ children }) => (
-                              <pre className="p-4 rounded-lg bg-slate-800 overflow-x-auto mb-3 border border-slate-700">
+                              <pre className="p-4 rounded-lg bg-[var(--bg-tertiary)] overflow-x-auto mb-3 border border-[var(--border-default)]">
                                 {children}
                               </pre>
                             ),
@@ -388,44 +388,44 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
                               </a>
                             ),
                             blockquote: ({ children }) => (
-                              <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-3 italic text-slate-300 bg-slate-800/50">
+                              <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-3 italic text-[var(--text-secondary)] bg-[var(--bg-secondary)]">
                                 {children}
                               </blockquote>
                             ),
                             table: ({ children }) => (
                               <div className="overflow-x-auto my-3">
-                                <table className="min-w-full border border-slate-700 rounded-lg">
+                                <table className="min-w-full border border-[var(--border-default)] rounded-lg">
                                   {children}
                                 </table>
                               </div>
                             ),
                             thead: ({ children }) => (
-                              <thead className="bg-slate-800">
+                              <thead className="bg-[var(--bg-tertiary)]">
                                 {children}
                               </thead>
                             ),
                             tbody: ({ children }) => (
-                              <tbody className="divide-y divide-slate-700">
+                              <tbody className="divide-y divide-[var(--border-default)]">
                                 {children}
                               </tbody>
                             ),
                             tr: ({ children }) => (
-                              <tr className="hover:bg-slate-800/50">
+                              <tr className="hover:bg-[var(--bg-secondary)]">
                                 {children}
                               </tr>
                             ),
                             th: ({ children }) => (
-                              <th className="px-4 py-2 text-left text-sm font-semibold text-white border-b border-slate-700">
+                              <th className="px-4 py-2 text-left text-sm font-semibold text-[var(--text-primary)] border-b border-[var(--border-default)]">
                                 {children}
                               </th>
                             ),
                             td: ({ children }) => (
-                              <td className="px-4 py-2 text-sm text-slate-200">
+                              <td className="px-4 py-2 text-sm text-[var(--text-primary)]">
                                 {children}
                               </td>
                             ),
                             hr: () => (
-                              <hr className="my-4 border-slate-700" />
+                              <hr className="my-4 border-[var(--border-default)]" />
                             ),
                           }}
                         >
@@ -472,7 +472,7 @@ export const SolAIChat: React.FC<SolAIChatProps> = ({ initialPrompt, className =
             value={input}
             onChange={(e: any) => setInput(e.target.value)}
             onKeyDown={handleKeyPress}
-            placeholder="Nhập câu hỏi của bạn... (Enter để gửi, Shift+Enter xuống dòng)"
+            placeholder="Type your question... (Enter to send, Shift+Enter for new line)"
             disabled={isLoading}
             rows={3}
             className="w-full min-h-[80px] max-h-[240px] px-4 py-3 rounded-lg bg-[#0f172a] border border-[#334155] text-[#f1f5f9] placeholder:text-[#94a3b8] transition-all duration-200 focus:outline-none focus:border-[#6366f1] focus:ring-2 focus:ring-[rgba(99,102,241,0.2)] disabled:bg-[#1e293b] disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto"

@@ -59,7 +59,7 @@ export const useWalletData = (apiBaseUrl: string, walletAddress: string | null) 
     const fetchWalletData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${apiBaseUrl}/dashboard/wallet/${walletAddress}`);
+        const response = await fetch(`${apiBaseUrl}/api/dashboard/wallet/${walletAddress}`);
         if (!response.ok) {
           throw new Error("Failed to fetch wallet data");
         }

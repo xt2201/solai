@@ -97,20 +97,20 @@ export const SwapWidget = ({ className }: SwapWidgetProps) => {
               MAX
             </button>
           </div>
-          <div className="flex gap-3 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+          <div className="flex gap-3 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-default)]">
             <input
               type="number"
               value={inputAmount}
               onChange={(e) => setInputAmount(e.target.value)}
               placeholder="0.00"
-              className="flex-1 bg-transparent text-white text-xl font-semibold outline-none"
+              className="flex-1 bg-transparent text-[var(--text-primary)] text-xl font-semibold outline-none"
               min="0"
               step="any"
             />
             <select
               value={inputToken}
               onChange={(e) => setInputToken(e.target.value)}
-              className="px-3 py-2 rounded-lg bg-slate-700 text-white font-medium outline-none cursor-pointer hover:bg-slate-600 transition-colors"
+              className="px-3 py-2 rounded-lg bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium outline-none cursor-pointer hover:bg-[var(--border-hover)] transition-colors"
             >
               {POPULAR_TOKENS.map((token) => (
                 <option key={token.symbol} value={token.symbol}>
@@ -125,9 +125,9 @@ export const SwapWidget = ({ className }: SwapWidgetProps) => {
         <div className="flex justify-center -my-2 relative z-10">
           <button
             onClick={handleSwapTokens}
-            className="p-2 rounded-full bg-slate-700 hover:bg-slate-600 transition-colors border-4 border-[var(--card-background)]"
+            className="p-2 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--border-hover)] transition-colors border-4 border-[var(--card-background)]"
           >
-            <ArrowDownUp className="w-4 h-4 text-white" />
+            <ArrowDownUp className="w-4 h-4 text-[var(--text-primary)]" />
           </button>
         </div>
 
@@ -136,18 +136,18 @@ export const SwapWidget = ({ className }: SwapWidgetProps) => {
           <div className="flex justify-between mb-2">
             <label className="text-sm text-[var(--text-secondary)]">You receive</label>
           </div>
-          <div className="flex gap-3 p-4 rounded-lg bg-slate-800/50 border border-slate-700">
+          <div className="flex gap-3 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-default)]">
             <input
               type="text"
               value={loading ? '...' : quote ? quote.output_amount.toFixed(6) : '0.00'}
               readOnly
               placeholder="0.00"
-              className="flex-1 bg-transparent text-white text-xl font-semibold outline-none"
+              className="flex-1 bg-transparent text-[var(--text-primary)] text-xl font-semibold outline-none"
             />
             <select
               value={outputToken}
               onChange={(e) => setOutputToken(e.target.value)}
-              className="px-3 py-2 rounded-lg bg-slate-700 text-white font-medium outline-none cursor-pointer hover:bg-slate-600 transition-colors"
+              className="px-3 py-2 rounded-lg bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium outline-none cursor-pointer hover:bg-[var(--border-hover)] transition-colors"
             >
               {POPULAR_TOKENS.map((token) => (
                 <option key={token.symbol} value={token.symbol}>
@@ -160,37 +160,37 @@ export const SwapWidget = ({ className }: SwapWidgetProps) => {
 
         {/* Quote Details */}
         {quote && !loading && (
-          <div className="mb-6 p-4 rounded-lg bg-slate-800/30 border border-slate-700 space-y-2">
+          <div className="mb-6 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-default)] space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-[var(--text-secondary)]">Rate</span>
               <span className="text-white font-medium">
-                1 {inputToken} = {(quote.output_amount / quote.input_amount).toFixed(4)} {outputToken}
+                1 {inputToken} = {quote.exchange_rate.toFixed(4)} {outputToken}
               </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-[var(--text-secondary)]">Price Impact</span>
-              <span className={quote.price_impact > 1 ? 'text-yellow-400' : 'text-emerald-400'}>
+              <span className={quote.price_impact_pct > 1 ? 'text-yellow-400' : 'text-emerald-400'}>
                 <TrendingDown className="w-3 h-3 inline mr-1" />
-                {quote.price_impact.toFixed(2)}%
+                {quote.price_impact_pct.toFixed(2)}%
               </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-[var(--text-secondary)]">Minimum Received</span>
               <span className="text-white">
-                {quote.minimum_received.toFixed(6)} {outputToken}
+                {quote.minimum_output.toFixed(6)} {outputToken}
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-[var(--text-secondary)]">Fee</span>
+              <span className="text-[var(--text-secondary)]">Slippage Tolerance</span>
               <span className="text-white">
-                {quote.fee.toFixed(4)} {inputToken}
+                {(quote.slippage_bps / 100).toFixed(2)}%
               </span>
             </div>
-            {quote.route && quote.route.length > 0 && (
+            {quote.route_plan && quote.route_plan.length > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-[var(--text-secondary)]">Route</span>
                 <span className="text-white text-xs">
-                  {quote.route.join(' → ')}
+                  {quote.route_plan.map(r => r.dex).join(' → ')}
                 </span>
               </div>
             )}

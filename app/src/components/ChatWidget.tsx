@@ -38,22 +38,22 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ initialPrompt, onOpenCha
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}
           w-full sm:w-[420px] lg:w-[480px]
-          bg-slate-900 border-l border-slate-800
+          bg-[var(--bg-primary)] border-l border-[var(--border-default)]
           shadow-2xl
           flex flex-col
         `}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-gradient-to-r from-slate-900 to-slate-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border-default)] bg-[var(--bg-secondary)]">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
               <MessageCircle className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="text-xs uppercase tracking-wider text-slate-400">
+              <p className="text-xs uppercase tracking-wider text-[var(--text-tertiary)]">
                 SolAI Assistant
               </p>
-              <h2 className="text-lg font-semibold text-white">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">
                 AI Consultation
               </h2>
             </div>
@@ -64,12 +64,12 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ initialPrompt, onOpenCha
             className="w-9 h-9 inline-flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366f1]"
             aria-label="Đóng sidebar chat"
           >
-            <X className="w-5 h-5 text-slate-300" />
+            <X className="w-5 h-5 text-[var(--text-secondary)]" />
           </button>
         </div>
 
         {/* Chat Content */}
-        <div className="flex-1 overflow-hidden p-6 bg-slate-950">
+        <div className="flex-1 overflow-hidden p-6 bg-[var(--bg-primary)]">
           <SolAIChat initialPrompt={initialPrompt} className="h-full" />
         </div>
       </div>
@@ -97,7 +97,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ initialPrompt, onOpenCha
             <MessageCircle className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping" aria-hidden="true" />
           </span>
-          <span className="font-medium text-sm hidden sm:block">Hỏi AI</span>
+          <span className="font-medium text-sm hidden sm:block">Chat with SolAI</span>
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         </button>
       )}

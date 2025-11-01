@@ -7,6 +7,7 @@ import { Search, Bell, Settings } from 'lucide-react';
 import { Input } from '../ui/Input';
 import { Badge } from '../ui/Badge';
 import { Avatar } from '../ui/Avatar';
+import { ThemeToggle } from '../ThemeToggle';
 import logoMark from '../../../../img/logo.png';
 import logoWordmark from '../../../../img/logo.png';
 
@@ -37,7 +38,7 @@ export const TopNavigation: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-topnav h-16">
-      <div className="h-full bg-slate-900 border-b border-slate-800">
+      <div className="h-full bg-[var(--bg-secondary)] border-b border-[var(--border-default)] transition-colors duration-300">
         <div className="h-full px-6 flex items-center justify-between gap-6">
           {/* Left Section: Logo + Search */}
           <div className="flex items-center gap-6 flex-1 max-w-[600px]">
@@ -88,6 +89,9 @@ export const TopNavigation: React.FC = () => {
 
           {/* Right Section: Actions + User */}
           <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Notifications */}
             <button
               className="relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-[var(--bg-tertiary)] transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:outline-none"

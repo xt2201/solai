@@ -377,3 +377,47 @@
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* ========================================
+   LIGHT MODE THEME
+   ======================================== */
+
+.light {
+  /* Light Theme Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-elevated: #e2e8f0;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-inverse: #f1f5f9;
+
+  --border-default: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --border-focus: #6366f1;
+  --border-subtle: #f1f5f9;
+
+  /* Adjust component backgrounds for light mode */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+}
+
+.dark {
+  /* Dark Theme (Keep existing values) */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-elevated: #475569;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --border-default: #334155;
+  --border-hover: #475569;
+  --border-focus: #6366f1;
+  --border-subtle: #475569;
+}
